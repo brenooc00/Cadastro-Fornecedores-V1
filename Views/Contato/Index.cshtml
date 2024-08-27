@@ -1,0 +1,49 @@
+@model List<ContatoModel>
+@{
+    ViewData["Title"] = "Listagem de contatos";
+}
+
+<div class = "text-center">
+    <div class="d-grid gap-2 d-md-flex justify-content-md-start">
+        <a class="btn btn-primary" role="buttom" asp-controller="Contato" asp-action="Create">Adicionar novo fornecedor</a>
+    </div>
+    
+    <br />
+    <h1 class = "display-4">Listagem de contatos</h1>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">ID</th>
+      <th scope="col">Nome</th>
+      <th scope="col">CNPJ</th>
+      <th scope="col">Segmento</th>
+      <th scope="col">CEP</th>
+      <th scope="col">Endereço</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    @if(Model != null && Model.Any())
+    {
+      foreach(ContatoModel contato in Model)
+      {
+        <tr>
+      <th scope="row">@contato.id</th>
+      <td>@contato.nome</td>
+      <td>@contato.cnpj</td>
+      <td>@contato.segmento</td>
+      <td>@contato.cep</td>
+      <td>@contato.endereco</td>
+      <td>
+        <div class="btn-group" role="group">
+            <a role="button" class="btn btn-primary" asp-route-id="@contato.id" asp-controller="Contato" asp-action="Update">Editar</a>
+            <a role="button" class="btn btn-danger" asp-route-id="@contato.id" asp-controller="Contato" asp-action="Delete">Excluir</a>
+        </div>
+      </td>
+    </tr>
+      }
+    }
+  </tbody>
+</table>
+</div>
